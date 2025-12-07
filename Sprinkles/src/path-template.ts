@@ -1,4 +1,4 @@
-import config from "./config";
+iimport config from "./config";
 import { PlayerState } from "./spotify-apis";
 
 interface PathVar {
@@ -30,13 +30,16 @@ export class PathTemplate {
             name: "artist_name",
             desc: "Artist name / Publisher name",
             pattern: `.+`,
-            getValue: m => m.album_artist
+            getValue: m => m.album_artist ? m.album_artist.replaceAll("/", ", ") : m.album_artist
         },
         {
             name: "all_artist_names",
             desc: "Name of all artists featured in the track, separated by comma",
             pattern: `.+`,
-            getValue: m => m.artist ? m.artist.replaceAll(", ") : m.album_artist
+            getValue: m => {
+                let artists = m.artist || m.album_artist;
+                return artists ? artists.replaceAll("/", ", ") : artists;
+            }
         },
         {
             name: "album_name",
