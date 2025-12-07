@@ -242,8 +242,7 @@ export class TemplatedSearchTree {
             node.id += id;
         }
     }
-
-    private findOrAddChild(node: TemplateNode, pattern: string, isLiteral: boolean): TemplateNode {
+        private findOrAddChild(node: TemplateNode, pattern: string, isLiteral: boolean): TemplateNode {
         for (let child of node.children) {
             if (child.pattern === pattern && child.literal === isLiteral) {
                 return child;
@@ -252,4 +251,9 @@ export class TemplatedSearchTree {
         const newChild: TemplateNode = {
             children: [],
             pattern,
-            literal:
+            literal: isLiteral
+        };
+        node.children.push(newChild);
+        return newChild;
+    }
+} // <-- closes class TemplatedSearchTree
