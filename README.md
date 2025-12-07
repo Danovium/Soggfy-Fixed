@@ -49,3 +49,7 @@ Alternatively, `Injector.exe` can be used to launch _or_ inject Soggfy into an a
 - [XSpotify](https://web.archive.org/web/20200303145624/https://github.com/meik97/XSpotify) and spotifykeydumper - Inspiration for this project
 - [Spicetify](https://github.com/khanhas/spicetify-cli), [Ghidra](https://ghidra-sre.org/) and [x64dbg](https://x64dbg.com/) - Tools for reversing and debugging the client
 - [abba23's spotify-adblock](https://github.com/abba23/spotify-adblock) - The built-in telemetry/update blocker is based on this
+
+# My Fixes
+Changed Multiple Artists from being divided by a "/" (ex. John Doe/Jane Doe) and instead replaced via a comma ", " (ex. John Doe, Jane Doe)
+This should hopefully fix scrobbing for Last.fm and Contributing Artists not showing up
