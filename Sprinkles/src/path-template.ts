@@ -36,7 +36,7 @@ export class PathTemplate {
             name: "all_artist_names",
             desc: "Name of all artists featured in the track, separated by comma",
             pattern: `.+`,
-            getValue: m => m.artist ? m.artist.replaceAll("/", ", ") : m.album_artist
+            getValue: m => m.artist ? m.artist.replaceAll(", ") : m.album_artist
         },
         {
             name: "album_name",
