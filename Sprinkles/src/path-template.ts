@@ -30,16 +30,13 @@ export class PathTemplate {
             name: "artist_name",
             desc: "Artist name / Publisher name",
             pattern: `.+`,
-            getValue: m => m.album_artist ? m.album_artist.replaceAll("/", ", ") : m.album_artist
+            getValue: m => m.album_artist
         },
         {
             name: "all_artist_names",
             desc: "Name of all artists featured in the track, separated by comma",
             pattern: `.+`,
-            getValue: m => {
-                let artists = m.artist || m.album_artist;
-                return artists ? artists.replaceAll("/", ", ") : artists;
-            }
+            getValue: m => m.artist || m.album_artist
         },
         {
             name: "album_name",
@@ -111,7 +108,24 @@ export class PathTemplate {
         }
     ]);
 
+    /** Normalize metadata so artists always use commas instead of slashes */
+    static normalizeMetadata(meta: any) {
+        if (meta.artist) {
+            meta.artist = meta.artist.replaceAll("/", ", ");
+        }
+        if (meta.album_artist) {
+            meta.album_artist = meta.album_artist.replaceAll("/", ", ");
+        }
+        if (meta.context?.metadata?.context_description) {
+            meta.context.metadata.context_description =
+                meta.context.metadata.context_description.replaceAll("/", ", ");
+        }
+        return meta;
+    }
+
     static getVarsFromMetadata(meta: any, playback: PlayerState) {
+        meta = this.normalizeMetadata(meta);
+
         let vals: PathTemplateVars = {};
         for (let pv of PathTemplate.Vars) {
             vals[pv.name] = pv.getValue(meta, playback);
@@ -131,6 +145,7 @@ export class PathTemplate {
             return val;
         });
     }
+
     static escapePath(str: string) {
         //https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
         const ReplacementChars = {
@@ -180,8 +195,6 @@ interface TemplateNode {
     pattern: string;
     literal: boolean;
     id?: string;
-    //how deep the parent should recuse for the pattern to match (must be regex).
-    //ex. pattern "album(/CD 1)?" may need an extra recursion to match path "album/CD 1/".
     maxDepth?: number;
 }
 
@@ -209,9 +222,9 @@ export class TemplatedSearchTree {
         for (let part of this.template) {
             let pattern = PathTemplate.render(part, vars);
             let literal = !/{(.+?)}/.test(pattern);
-            let mayBranch = pattern.includes("{multi_disc_path}"); //still fucked if included more than once, but that's enough for now.
+            let mayBranch = pattern.includes("{multi_disc_path}");
 
-            if (!literal) { //placeholder is keept for unknown variables
+            if (!literal) {
                 pattern = pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
                 pattern = pattern.replace(/\\{(.+?)\\}/g, (g0, g1) => {
                     if (g1 === "_ext") return EXT_REGEX.source;
@@ -232,16 +245,4 @@ export class TemplatedSearchTree {
 
     private findOrAddChild(node: TemplateNode, pattern: string, isLiteral: boolean) {
         for (let child of node.children) {
-            if (child.literal === isLiteral && this.collator.compare(child.pattern, pattern) === 0) {
-                return child;
-            }
-        }
-        let child = {
-            children: [],
-            pattern: pattern,
-            literal: isLiteral
-        };
-        node.children.push(child);
-        return child;
-    }
-}
+            if (child
