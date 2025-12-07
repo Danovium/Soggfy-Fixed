@@ -13,7 +13,7 @@ export type PathTemplateVars = Record<string, string>;
 
 function createVarMap(vars: PathVar[]) {
     for (let entry of vars) {
-        vars[entry.name] = entry;
+        (vars as any)[entry.name] = entry;
     }
     return vars as PathVar[] & Record<string, PathVar>;
 }
@@ -161,7 +161,7 @@ export class PathTemplate {
         };
         let repl: any = config.savePaths.invalidCharRepl;
         if (repl === "unicode") {
-            repl = v => ReplacementChars[v] ?? " ";
+            repl = (v: string) => ReplacementChars[v] ?? " ";
         }
         //invalid characters -> similar characters
         str = str.replace(/[\x00-\x1f\/\\:*?"<>|]/g, repl);
@@ -243,6 +243,13 @@ export class TemplatedSearchTree {
         }
     }
 
-    private findOrAddChild(node: TemplateNode, pattern: string, isLiteral: boolean) {
+    private findOrAddChild(node: TemplateNode, pattern: string, isLiteral: boolean): TemplateNode {
         for (let child of node.children) {
-            if (child
+            if (child.pattern === pattern && child.literal === isLiteral) {
+                return child;
+            }
+        }
+        const newChild: TemplateNode = {
+            children: [],
+            pattern,
+            literal: isLiteral
