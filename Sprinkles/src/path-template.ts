@@ -1,4 +1,4 @@
-iimport config from "./config";
+import config from "./config";
 import { PlayerState } from "./spotify-apis";
 
 interface PathVar {
