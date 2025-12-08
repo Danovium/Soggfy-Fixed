@@ -19,7 +19,7 @@ export default class Components {
 <div class="sgf-settings-modal" tabindex="1" role="dialog">
     <div class="sgf-settings-container">
         <div class="sgf-settings-header">
-            <h1 class="sgf-header-title" as="h1">Soggfy settings</h1>
+            <h1 class="sgf-header-title" as="h1">Soggfy-Fixed settings</h1>
 
             <button aria-label="Close" class="sgf-settings-closeBtn">
                 <svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
