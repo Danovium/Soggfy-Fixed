@@ -8,6 +8,11 @@ Using Soggfy is great, but playing back Songs on iTunes (or the iOS Music app) l
 
 IF this is not an issue for you on regular Soggfy then you should probably not use this. 
 
+# Note
+Every metadata OTHER than genres are included. This is because Soggfy would have to contact Spotify's API directly through your own app on the Developer Portal, which increases the chances of being banned. 
+
+Something like getting info from last.fm or some other database could maybe be added in the future, but as of right now there are no plans to do so.
+
 # Linux? macOS?
 I honestly don't plan to port to either of those. As the creator said, it relies too much on the Windows API to be ported.
 
