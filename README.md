@@ -31,6 +31,8 @@ Make sure that Real-time protection in Windows Security is turned off. Soggfy wi
 
 Additionally, search will also be broken if it isn't disabled.
 
+If you're wondering why, its simply due to how Soggfy modifies the appearance of Spotify itself. 
+
 # Disclaimer
 As with the original repo, this program should not be used to download music you don't physically or digitally own.
 
