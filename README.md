@@ -31,3 +31,10 @@ However, AD blocking and downloading itself should still work.
 Another issue ive had is search being broken. I'm not exactly sure if this applies to other people, but if it does, I'm sorry.
 You can play an album on your phone, then change the output device to be your PC. (or add it to your Library)
 
+# Disclaimer
+As with the original repo, this program should not be used to download music you don't physically or digitally own.
+
+It is meant to showcase how music can be ripped from Spotify, without downloading them directly.
+
+This fork also has the same risks of getting your account banned as the original one. Use an alt account or keep backups of your playlists.
+
