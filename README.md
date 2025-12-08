@@ -6,7 +6,7 @@ This is my fork of Soggfy that separates contributing artists via a comma instea
 # Why?
 Using Soggfy is great, but playing back Songs on iTunes (or the iOS Music app) leads to inaccurate last.fm scrobbles and false search results (ex. Drake/Future is counted as one artist, instead of two seperate ones)
 
-IF this is not an issue for you on regular Soggfy then you should probably not use this. 
+Additionally, this repo contains a few changes to be able to be built on GitHub Actions.
 
 # Note
 Every metadata OTHER than genres are included. This is because Soggfy would have to contact Spotify's API directly through your own app on the Developer Portal, which increases the chances of being banned. 
