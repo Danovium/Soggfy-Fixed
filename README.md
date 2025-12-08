@@ -21,7 +21,7 @@ Maybe sometime in the future I'll take a look at it, as of right now, this is Wi
 - [Spotizer](https://lavaforge.org/spotizerr) - Download manager, meant for Media Servers, supports downloading from Deezer for FLACs
 - [DAB Music Player](https://dab.yeet.su/) - Music Downloads, recommended for Mobile Users
 - [Soulseek](https://www.slsknet.org/news/) - P2P platform for downloading music
-
+Remember to support indie artists by buying their merch or simply donating, Spotify's payout isn't fair (0.0005$ per stream) but YOUR 5$ donation could equal to listening to their music over 1000 times. 
 
 
 # Issues
